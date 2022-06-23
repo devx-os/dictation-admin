@@ -8,6 +8,8 @@ interface PostsFilteredResponse extends IFilteredResponse{
 type Post = {
     title: string
     author: string
+    status: PostStatus
+    type: PostType
 }
 
 type ReadPostByIdQParams = ID

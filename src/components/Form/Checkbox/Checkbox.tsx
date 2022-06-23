@@ -2,7 +2,8 @@ import * as React from 'react';
 import {ICheckboxProps} from './types';
 
 const Checkbox = React.forwardRef<HTMLInputElement, ICheckboxProps>(({
-                                                                         label,
+                                                                         label = '',
+    checked = false,
                                                                          ...rest
                                                                      }, ref): JSX.Element => {
     return (
@@ -10,6 +11,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, ICheckboxProps>(({
             <label className="cursor-pointer label justify-start">
                 <input
                     {...rest}
+                    checked={checked}
                     ref={ref}
                     type="checkbox"
                     className="checkbox checkbox-primary mr-2"

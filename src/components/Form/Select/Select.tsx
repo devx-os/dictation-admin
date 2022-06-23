@@ -6,10 +6,12 @@ interface ISelectProps {
     label?: string;
     placeholder: string;
     options: string[];
+    value: any;
+    onChange: () => void;
 }
 
 const Select = React.forwardRef<HTMLSelectElement, ISelectProps>(
-    ({ className, label, options, ...rest }: ISelectProps, ref: React.Ref<HTMLSelectElement>): JSX.Element | null => {
+    ({ className, label, options, value, onChange, ...rest }: ISelectProps, ref: React.Ref<HTMLSelectElement>): JSX.Element | null => {
         if (!options?.length) {
             console.error('No options provided for Select component.');
             return null;
@@ -18,7 +20,7 @@ const Select = React.forwardRef<HTMLSelectElement, ISelectProps>(
         return (
             <div className={`form-control ${className}`}>
                 {label && <Label htmlFor=''>{label}</Label>}
-                <select {...rest} ref={ref} className="select select-bordered select-primary w-full">
+                <select {...rest} ref={ref} value={value} onChange={onChange} className="select select-bordered select-primary w-full">
                     {options.map((o: string, i) => (
                         <option key={`${o}-${i}`}>{o}</option>
                     ))}

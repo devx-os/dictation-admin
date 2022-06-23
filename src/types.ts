@@ -1,14 +1,15 @@
 import {SubmitHandler} from "react-hook-form";
 
-interface ID {
+export interface ID {
     id: string
 }
 
-interface IForm {
+export interface IForm {
     initialValues?: any;
     onSubmit: SubmitHandler<any>;
 }
-interface IAppPage {
+
+export interface IAppPage {
     name: string
     url: string
     component: () => JSX.Element,
@@ -16,13 +17,28 @@ interface IAppPage {
     icon?: () => JSX.Element
 }
 
-interface IPaginationResponse {
+export interface IPaginationResponse {
     page: number,
     limit: number,
     total: number
 }
 
-interface IFilteredResponse {
+export interface ISortResponse {
+
+}
+
+export interface IFilteredResponse {
     data: any[],
     pagination: IPaginationResponse
+    sort: ISortResponse
+}
+
+export enum PostStatus {
+    DRAFT = 'draft',
+    PUBLISHED = 'published'
+}
+
+export enum PostType {
+    POST = 'post',
+    PAGE = 'page'
 }

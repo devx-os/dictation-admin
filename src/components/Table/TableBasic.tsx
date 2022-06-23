@@ -15,7 +15,7 @@ const TableBasic = ({ tableInstance }: TableBasicProps) => {
     } = tableInstance
 
     return (
-        <table {...getTableProps()}>
+        <table className='table w-full' {...getTableProps()}>
             <thead>
             {headerGroups.map((headerGroup: any) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
