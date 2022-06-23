@@ -1,0 +1,22 @@
+{
+  "summaryPanel": {
+    "section": {
+      "General": "General",
+      "Operations": "Operations",
+      "Performance": "Performance",
+      "Totals": "Totals"
+    },
+    "item": {
+      "timeInMarket": "Time in market",
+      "buy": "Buy",
+      "sell": "Sell",
+      "investment": "Investment",
+      "absoluteGrossPerformance": "Absolute gross performance",
+      "grossPerformance": "Gross performance",
+      "fees": "Fees",
+      "absoluteNetPerformance": "Absolute net performance",
+      "netPerformance": "Net performance",
+      "totalAssets": "Total assets"
+    }
+  }
+}

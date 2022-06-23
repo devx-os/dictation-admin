@@ -1,0 +1,3 @@
+interface TableProps {
+    tableInstance: any
+}
