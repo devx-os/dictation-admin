@@ -30,7 +30,8 @@ const IndeterminateCheckbox = React.forwardRef(
 const PostsTable = () => {
     const {data: postsData} = useReadPosts()
 
-    const deletePostDialog = useDialog('delete-post-modal')
+// const [deletePostDialogOpen, setDeletePostDialogOpen] = React.useState(false)
+const deleteDialog = useDialog('delete-post-modal')
     const navigate = useNavigate()
 
     const onEditState = () => {
@@ -62,22 +63,24 @@ const PostsTable = () => {
         },
         {
             Header: '',
-            accessor: '_id',
+            accessor: 'slug',
             Cell: ({row, value}: CellProps<Post>) => <div className='dropdown dropdown-end'>
                 <label tabIndex={0} className="btn btn-sm btn-circle btn-outline border-0">
                     <CgMoreVerticalAlt/>
                 </label>
                 <ul tabIndex={0} className='dropdown-content menu shadow bg-base-100 w-52 rounded'>
                     <li><a onClick={() => navigate(`${value}`)}><RiPencilRuler2Line/>Modifica</a></li>
-                    <li><a onClick={deletePostDialog.open}><CgTrash className='text-red-500'/>Elimina</a></li>
+                    <li><a onClick={deleteDialog.open}><CgTrash className='text-red-500'/>Elimina</a></li>
                 </ul>
             </div>
         }
     ], [])
 
+    const tableData = React.useMemo(() => postsData?.data || [], [postsData])
+
     const tableInstance = useTable({
             columns,
-            data: postsData?.data || [],
+            data: tableData
         },
         useRowSelect,
         hooks => {
@@ -101,9 +104,9 @@ const PostsTable = () => {
 
     return <>
         <TableBasic tableInstance={tableInstance}/>
-        {deletePostDialog && <Modal id='delete-post-modal' dialogOptions={deletePostDialog}>
+        <Modal id='delete-post-modal' dialogOptions={deleteDialog}>
             <p>Sei sicuro?</p>
-        </Modal>}
+        </Modal>
     </>
 }
 

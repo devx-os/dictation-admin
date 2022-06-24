@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {IUseDialogAction, IUseDialogState, UseDialogActions, UseDialogResult} from "./types";
 
 const dialogInitialState = {
     opened: false,

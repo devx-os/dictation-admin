@@ -1,22 +1,22 @@
 
-interface IOpenModalPayload {
+export interface IOpenModalPayload {
     selectedId?: string;
     itemData?: object;
 }
 
-interface IUseDialogAction {
+export interface IUseDialogAction {
     type: UseDialogActions;
     payload?: IOpenModalPayload;
 }
 
-interface IUseDialogState {
+export interface IUseDialogState {
     id: string;
     opened: boolean;
     selectedId?: string;
     itemData?: any;
 }
 
-type UseDialogResult = {
+export type UseDialogResult = {
     open: () => void;
     close: () => void;
     setSelectedId: (selectedId: string) => void;
@@ -26,7 +26,7 @@ type UseDialogResult = {
     itemData?: any
 }
 
-const enum UseDialogActions {
+export enum UseDialogActions {
     SET_ITEM_ID = 'SET_ITEM_ID',
     SET_ITEM_DATA = 'SET_ITEM_DATA',
     OPEN_MODAL = 'OPEN_MODAL',
