@@ -1,5 +1,4 @@
 import React from 'react';
-import {UseDialogResult} from "../../hooks/useDialog/types";
 
 export interface IModalActions {
     label: string;

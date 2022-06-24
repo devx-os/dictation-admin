@@ -6,7 +6,6 @@ const Login = () => {
     const navigate = useNavigate()
 
     const handleLoginFormSubmit = (values: LoginFormValues) => {
-        console.log('LOGIN FORM VALUES\n', values)
         if (values.email === 'admin@demo.com' && values.password === 'demo') navigate('/dashboard')
     }
 

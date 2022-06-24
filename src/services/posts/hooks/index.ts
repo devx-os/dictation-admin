@@ -1,4 +1,4 @@
 import useReadPosts from "./useReadPosts";
-import useReadPostById from "./useReadPostById";
+import useReadPostById from "./useReadPostBySlug";
 
 export { useReadPosts, useReadPostById }

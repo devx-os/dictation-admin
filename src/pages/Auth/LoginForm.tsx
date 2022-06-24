@@ -24,22 +24,30 @@ const LoginForm = ({initialValues, onSubmit}: LoginFormProps) => {
         register,
         handleSubmit,
         formState: {errors},
+        setValue
     } = useForm<LoginFormValues>({
         resolver: yupResolver(schema),
         defaultValues: initialValues || defaultValues,
     });
 
+    const handleDemo = () => {
+        setValue('email', 'admin@demo.com')
+        setValue('password', 'demo')
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <sub className='text-gray-500 font-bold'>DEMO</sub>
-            <br/>
-            <sub className='text-gray-500'>email: admin@demo.com - password: demo</sub>
+            <div className='cursor-pointer' onClick={handleDemo}>
+                <sub className='text-gray-500 font-bold'>DEMO</sub>
+                <br/>
+                <sub className='text-gray-500'>email: admin@demo.com - password: demo</sub>
+            </div>
             <Input className='my-6' {...register('email')} placeholder='Email address'/>
             <Input className='mb-6' {...register('password')} placeholder='Password' type='password'/>
 
             <div className="flex justify-between items-center mb-6">
                 {/*<div className="form-group form-check">*/}
-                    <Checkbox {...register('remember')} label='Remember me' />
+                <Checkbox {...register('remember')} label='Remember me'/>
                 <a
                     href="#!"
                     className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
@@ -67,7 +75,7 @@ const LoginForm = ({initialValues, onSubmit}: LoginFormProps) => {
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
             >
-                <CgFacebook />
+                <CgFacebook/>
                 Continue with Facebook
             </a>
             <a
@@ -78,7 +86,7 @@ const LoginForm = ({initialValues, onSubmit}: LoginFormProps) => {
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
             >
-                <CgTwitter />
+                <CgTwitter/>
                 Continue with Twitter
             </a>
         </form>

@@ -3,6 +3,7 @@ import {Posts} from './Posts'
 import {NotFound} from "./NotFound";
 import {Login} from "./Auth";
 import {IAppPage} from "../types";
+import EditPost from "./Posts/EditPost";
 
 const pages: IAppPage[] = [
     {
@@ -25,6 +26,12 @@ const pages: IAppPage[] = [
         name: 'Posts',
         url: '/posts',
         component: Posts,
+        layout: true
+    },
+    {
+        name: 'Post',
+        url: '/posts/:slug',
+        component: EditPost,
         layout: true
     }
 ]

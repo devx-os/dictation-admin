@@ -3,9 +3,7 @@ import PostsTable from "./PostsTable";
 
 const Posts = () => {
     return (
-        <div>
-            <PostsTable />
-        </div>
+        <PostsTable/>
     );
 };
 

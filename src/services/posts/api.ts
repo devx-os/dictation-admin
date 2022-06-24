@@ -1,6 +1,6 @@
 import {backendClient} from "../../utils/httpClient";
 import {IFilteredResponse} from "../../types";
-import {Post, PostsFilteredResponse, ReadPostByIdQParams} from "./types";
+import {Post, PostsFilteredResponse, ReadPostBySlugQParams} from "./types";
 
 const POSTS_ENDPOINT = '/post'
 
@@ -9,9 +9,9 @@ const readPosts = async (): Promise<PostsFilteredResponse> => {
     return data
 }
 
-const readPostById = async (id: ReadPostByIdQParams): Promise<Post> => {
-    const { data } = await backendClient.get(`${POSTS_ENDPOINT}/${id}`)
+const readPostBySlug = async ({slug}: ReadPostBySlugQParams): Promise<Post> => {
+    const { data } = await backendClient.get(`${POSTS_ENDPOINT}/${slug}`)
     return data
 }
 
-export { readPosts, readPostById }
+export { readPosts, readPostBySlug }

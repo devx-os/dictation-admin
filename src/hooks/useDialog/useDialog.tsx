@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {IUseDialogAction, IUseDialogState, UseDialogActions, UseDialogResult} from "./types";
 
 const dialogInitialState = {
     opened: false,
@@ -9,36 +8,33 @@ const dialogInitialState = {
 
 const dialogReducer = (state: IUseDialogState, action: IUseDialogAction): IUseDialogState => {
     const { type, payload } = action;
-    switch (type) {
-        case UseDialogActions.SET_ITEM_DATA:
-            return { ...state, opened: true, itemData: payload?.itemData };
-        case UseDialogActions.SET_ITEM_ID:
-            return { ...state, opened: true, selectedId: payload?.selectedId };
-        case UseDialogActions.OPEN_MODAL:
-            return { ...state, opened: true };
-        case UseDialogActions.CLOSE_MODAL:
-            return { ...state, opened: false, selectedId: undefined, itemData: undefined };
-        default:
-            return state;
+    const actions = {
+        [UseDialogActions.SET_ITEM_DATA]: () => ({ ...state, itemData: payload?.itemData }),
+        [UseDialogActions.SET_ITEM_ID]: () => ({ ...state, selectedId: payload?.selectedId }),
+        [UseDialogActions.OPEN_MODAL]: () => ({ ...state, opened: true }),
+        [UseDialogActions.CLOSE_MODAL]: () => ({ ...state, opened: false, selectedId: undefined, itemData: undefined }),
     }
+    return actions[type] ? actions[type]() : state;
 };
 
 const useDialog = (id: string): UseDialogResult => {
     const [state, dispatch] = React.useReducer(dialogReducer, { ...dialogInitialState, id });
 
-    const open = () => dispatch({ type: UseDialogActions.OPEN_MODAL });
-    const close = () => dispatch({ type: UseDialogActions.CLOSE_MODAL });
-    const setSelectedId = (selectedId: string) =>
-        dispatch({ type: UseDialogActions.SET_ITEM_ID, payload: { selectedId } });
-    const setItemData = (itemData: object) => dispatch({ type: UseDialogActions.SET_ITEM_DATA, payload: { itemData } });
+    const open = React.useCallback(() => dispatch({ type: UseDialogActions.OPEN_MODAL }), []);
+    const close = React.useCallback(() => dispatch({ type: UseDialogActions.CLOSE_MODAL }), []);
+    const setSelectedId = React.useCallback((selectedId: string) =>
+        dispatch({ type: UseDialogActions.SET_ITEM_ID, payload: { selectedId } }), []);
+    const setItemData = React.useCallback((itemData: object) => dispatch({ type: UseDialogActions.SET_ITEM_DATA, payload: { itemData } }), []);
 
-    return {
-        ...state,
-        open,
-        close,
-        setSelectedId,
-        setItemData,
-    };
+    return React.useMemo(() => {
+        return {
+            ...state,
+            open,
+            close,
+            setSelectedId,
+            setItemData
+        };
+    }, [state.opened, state.selectedId, state.itemData]);
 };
 
 export default useDialog;

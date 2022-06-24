@@ -12,4 +12,6 @@ type Post = {
     type: PostType
 }
 
-type ReadPostByIdQParams = ID
+type ReadPostBySlugQParams = {
+    slug: string
+}
