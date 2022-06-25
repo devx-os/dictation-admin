@@ -31,9 +31,12 @@ const PostUpdate = () => {
         }
     }, [slug, postData])
 
-    return !loading ? <div>
+    return !loading ? <>
+        <div className='flex w-max items-center space-x-2'>
+            <h1 className='text-2xl'>{slug ? 'Update post' : 'Create post'}</h1>
+        </div>
         <PostForm onSubmit={onSubmit} initialValues={postData}/>
-    </div> : <FullscreenLoader />
+    </> : <FullscreenLoader />
 
 };
 

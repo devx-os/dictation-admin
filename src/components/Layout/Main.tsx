@@ -4,10 +4,12 @@ type MainProps = {
     children: React.ReactElement
 }
 
-const Main = ({ children }: MainProps) => {
+const Main = ({children}: MainProps) => {
     return (
-        <main className='flex-grow card'>
-            {React.cloneElement(children, {className: 'card-body'})}
+        <main className='flex-grow card bg-base-200'>
+            <section className='card-body w-full h-full p-2'>
+                {children}
+            </section>
         </main>
     );
 };

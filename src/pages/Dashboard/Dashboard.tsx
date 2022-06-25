@@ -2,9 +2,11 @@ import * as React from 'react';
 
 const Dashboard = () => {
     return (
-        <div>
-            DASHBOARD
-        </div>
+        <>
+            <div className='flex w-max items-center space-x-2'>
+                <h2 className='text-xl'>Dashboard</h2>
+            </div>
+        </>
     );
 };
 

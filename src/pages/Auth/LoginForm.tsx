@@ -42,14 +42,14 @@ const LoginForm = ({initialValues, onSubmit}: LoginFormProps) => {
                 <br/>
                 <sub className='text-gray-500'>email: admin@demo.com - password: demo</sub>
             </div>
-            <Input className='my-6' {...register('email')} placeholder='Email address'/>
+            <Input className='my-6' {...register('email')} placeholder='Email address' type='email'/>
             <Input className='mb-6' {...register('password')} placeholder='Password' type='password'/>
 
             <div className="flex justify-between items-center mb-6">
                 {/*<div className="form-group form-check">*/}
                 <Checkbox {...register('remember')} label='Remember me'/>
                 <a
-                    href="#!"
+                    href="#"
                     className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
                 >Forgot password?</a
                 >
@@ -70,7 +70,7 @@ const LoginForm = ({initialValues, onSubmit}: LoginFormProps) => {
             <a
                 className="px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
                 style={{backgroundColor: "#3b5998"}}
-                href="#!"
+                href="#"
                 role="button"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
@@ -81,7 +81,7 @@ const LoginForm = ({initialValues, onSubmit}: LoginFormProps) => {
             <a
                 className="px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center"
                 style={{backgroundColor: "#55acee"}}
-                href="#!"
+                href="#"
                 role="button"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"

@@ -7,8 +7,8 @@ const Posts = () => {
     const navigate = useNavigate()
 
     return (<>
-            <div className='flex w-max'>
-                <h3>Posts</h3>
+            <div className='flex w-max items-center space-x-2'>
+                <h2 className='text-xl'>Posts</h2>
                 <button className='btn btn-outline btn-xs' onClick={() => navigate('/posts/create-post')}>
                     <CgMathPlus/> Add post
                 </button>
