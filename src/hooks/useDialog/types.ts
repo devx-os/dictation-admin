@@ -30,5 +30,5 @@ export enum UseDialogActions {
     SET_ITEM_ID = 'SET_ITEM_ID',
     SET_ITEM_DATA = 'SET_ITEM_DATA',
     OPEN_MODAL = 'OPEN_MODAL',
-    CLOSE_MODAL = 'CLOSE_MODAL',
+    CLOSE_MODAL = 'CLOSE_MODAL'
 }

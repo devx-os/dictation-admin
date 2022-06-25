@@ -3,7 +3,8 @@ import {Posts} from './Posts'
 import {NotFound} from "./NotFound";
 import {Login} from "./Auth";
 import {IAppPage} from "../types";
-import EditPost from "./Posts/EditPost";
+import PostUpdate from "./Posts/PostUpdate";
+import {RiHome2Line, RiArticleLine} from "react-icons/ri";
 
 const pages: IAppPage[] = [
     {
@@ -20,18 +21,28 @@ const pages: IAppPage[] = [
         name: 'Dashboard',
         url: '/dashboard',
         component: Dashboard,
-        layout: true
+        layout: true,
+        sidebar: true,
+        icon: RiHome2Line
     },
     {
         name: 'Posts',
         url: '/posts',
         component: Posts,
+        layout: true,
+        sidebar: true,
+        icon: RiArticleLine
+    },
+    {
+        name: 'Create Post',
+        url: '/posts/create-post',
+        component: PostUpdate,
         layout: true
     },
     {
-        name: 'Post',
+        name: 'Update Post',
         url: '/posts/:slug',
-        component: EditPost,
+        component: PostUpdate,
         layout: true
     }
 ]

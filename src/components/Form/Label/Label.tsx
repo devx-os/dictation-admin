@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { ILabelProps } from './types';
 
-const Label = ({ children }: ILabelProps): JSX.Element => (
-    <label htmlFor="" className="label">
+const Label = ({ htmlFor, children }: ILabelProps): JSX.Element => (
+    <label htmlFor={htmlFor} className="label">
         <span className="label-text">{children}</span>
     </label>
 );

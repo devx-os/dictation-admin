@@ -1,6 +1,13 @@
 import {backendClient} from "../../utils/httpClient";
-import {IFilteredResponse} from "../../types";
-import {Post, PostsFilteredResponse, ReadPostBySlugQParams} from "./types";
+
+import {
+    CreatePostQParams,
+    DeletePostQParams,
+    Post,
+    PostsFilteredResponse,
+    ReadPostBySlugQParams,
+    UpdatePostQParams
+} from "./types";
 
 const POSTS_ENDPOINT = '/post'
 
@@ -14,4 +21,19 @@ const readPostBySlug = async ({slug}: ReadPostBySlugQParams): Promise<Post> => {
     return data
 }
 
-export { readPosts, readPostBySlug }
+const createPost = async ({payload}: CreatePostQParams): Promise<Post> => {
+    const { data } = await backendClient.post(`${POSTS_ENDPOINT}`, payload)
+    return data
+}
+
+const updatePost = async ({slug, payload}: UpdatePostQParams): Promise<Post> => {
+    const { data } = await backendClient.put(`${POSTS_ENDPOINT}/${slug}`, payload)
+    return data
+}
+
+const deletePost = async ({slug}: DeletePostQParams): Promise<Post> => {
+    const { data } = await backendClient.delete(`${POSTS_ENDPOINT}/${slug}`)
+    return data
+}
+
+export { readPosts, readPostBySlug, createPost, updatePost, deletePost }

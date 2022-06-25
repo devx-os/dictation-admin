@@ -2,17 +2,21 @@ import * as React from 'react';
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
+import Sidebar from "./Sidebar";
 
 type LayoutProps = {
-    children: React.ReactNode
+    children: React.ReactElement
 }
 
 const Layout = ({children}: LayoutProps) => {
-    return (<>
+    return (<div className='m-2'>
             <Header/>
-            <Main>{children}</Main>
+            <div className='flex flex-row space-x-2 h-full'>
+                <Sidebar/>
+                <Main>{children}</Main>
+            </div>
             <Footer/>
-        </>
+        </div>
     );
 };
 

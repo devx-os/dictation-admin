@@ -13,7 +13,7 @@ const dialogReducer = (state: IUseDialogState, action: IUseDialogAction): IUseDi
         [UseDialogActions.SET_ITEM_DATA]: () => ({ ...state, itemData: payload?.itemData }),
         [UseDialogActions.SET_ITEM_ID]: () => ({ ...state, selectedId: payload?.selectedId }),
         [UseDialogActions.OPEN_MODAL]: () => ({ ...state, opened: true }),
-        [UseDialogActions.CLOSE_MODAL]: () => ({ ...state, opened: false, selectedId: undefined, itemData: undefined }),
+        [UseDialogActions.CLOSE_MODAL]: () => ({ ...state, opened: false, selectedId: undefined, itemData: undefined })
     }
     return actions[type] ? actions[type]() : state;
 };

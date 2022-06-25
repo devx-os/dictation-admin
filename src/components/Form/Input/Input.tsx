@@ -3,11 +3,15 @@ import { Label } from '../Label';
 import {InputProps} from "./types";
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ label, placeholder = '', className = '', type = 'text', ...rest }, ref): JSX.Element => {
+    ({ label, placeholder = '', className = '', inputClassName = '', type = 'text', ...rest }, ref): JSX.Element => {
+        const { value, name = '', ...hookFormProps } = rest;
+
         return (
             <div className={`form-control ${className}`}>
-                {label && <Label htmlFor={rest.name || ''}>{label}</Label>}
-                <input {...rest} ref={ref} placeholder={placeholder} className="input input-primary" type={type} />
+                {label && <Label htmlFor={name}>{label}</Label>}
+                <input {...hookFormProps}
+                       value={value}
+                       ref={ref} id={name} placeholder={placeholder} className={`input input-primary w-full ${inputClassName}`} type={type} />
             </div>
         );
     },

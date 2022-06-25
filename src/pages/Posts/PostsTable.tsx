@@ -30,8 +30,7 @@ const IndeterminateCheckbox = React.forwardRef(
 const PostsTable = () => {
     const {data: postsData} = useReadPosts()
 
-// const [deletePostDialogOpen, setDeletePostDialogOpen] = React.useState(false)
-const deleteDialog = useDialog('delete-post-modal')
+    const deleteDialog = useDialog('delete-post-modal')
     const navigate = useNavigate()
 
     const onEditState = () => {
@@ -42,7 +41,7 @@ const deleteDialog = useDialog('delete-post-modal')
         {
             Header: 'Image',
             accessor: 'image',
-            Cell: ({row, value}: CellProps<Post>) => <img src='https://picsum.photos/65/50' alt=""/>,
+            Cell: () => <img src='https://picsum.photos/65/50' alt=""/>,
             width: 100
         },
         {
@@ -52,19 +51,19 @@ const deleteDialog = useDialog('delete-post-modal')
         },
         {
             Header: 'Type',
-            accessor: 'type',
+            accessor: 'type.title',
             width: 150
         },
         {
             Header: 'State',
             accessor: 'state',
-            Cell: ({row, value}: CellProps<Post>) => <EditStateCell onEditState={onEditState} value={value}/>,
+            Cell: ({value}: CellProps<Post>) => <EditStateCell onEditState={onEditState} value={value}/>,
             width: 150
         },
         {
             Header: '',
             accessor: 'slug',
-            Cell: ({row, value}: CellProps<Post>) => <div className='dropdown dropdown-end'>
+            Cell: ({value}: CellProps<Post>) => <div className='dropdown dropdown-end'>
                 <label tabIndex={0} className="btn btn-sm btn-circle btn-outline border-0">
                     <CgMoreVerticalAlt/>
                 </label>
@@ -76,7 +75,7 @@ const deleteDialog = useDialog('delete-post-modal')
         }
     ], [])
 
-    const tableData = React.useMemo(() => postsData?.data || [], [postsData])
+    const tableData = React.useMemo(() => postsData?.data || [], [postsData?.data])
 
     const tableInstance = useTable({
             columns,

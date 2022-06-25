@@ -1,13 +1,12 @@
 import React from 'react';
 import pages from "../../pages";
-
-const blacklist = ['*']
+import {Link} from "react-router-dom";
 
 const Sidebar = () => {
     return (
-        <nav className='card flex flex-col bg-accent h-full'>
-            <ul>
-                {pages.filter(p => !blacklist.includes(p.url)).map((r,i) => <li key={`${r.name}-${i}`}>{r.name}</li>)}
+        <nav className='card bg-base-200 flex flex-col h-full'>
+            <ul className='menu menu-compact rounded-box p-2'>
+                {pages.filter(p => p.sidebar && p.icon).map((r,i) => <li key={`${r.name}-${i}`}><Link to={r.url}><>{r.icon}{r.name}</></Link></li>)}
             </ul>
         </nav>
     );

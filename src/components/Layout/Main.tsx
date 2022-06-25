@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 type MainProps = {
-    children: React.ReactNode
+    children: React.ReactElement
 }
 
 const Main = ({ children }: MainProps) => {
     return (
-        <main className='card'>
-            {children}
+        <main className='flex-grow card'>
+            {React.cloneElement(children, {className: 'card-body'})}
         </main>
     );
 };
