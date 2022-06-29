@@ -7,4 +7,5 @@ export interface InputProps {
     value?: any;
     onChange?: any;
     name?: string
+    control?: any
 }

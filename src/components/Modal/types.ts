@@ -3,8 +3,8 @@ import {UseDialogResult} from "../../hooks/useDialog/types";
 
 export interface IModalActions {
     label: string;
-    action: () => Promise<void>;
-    color?: string;
+    action: () => Promise<void> | void;
+    className?: string;
 }
 
 export interface IModalProps {

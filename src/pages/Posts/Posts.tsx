@@ -9,7 +9,7 @@ const Posts = () => {
     return (<>
             <div className='flex w-max items-center space-x-2'>
                 <h2 className='text-xl'>Posts</h2>
-                <button className='btn btn-outline btn-xs' onClick={() => navigate('/posts/create-post')}>
+                <button className='btn btn-outline btn-xs' onClick={() => navigate('/types/post/create-post')}>
                     <CgMathPlus/> Add post
                 </button>
             </div>

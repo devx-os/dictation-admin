@@ -5,44 +5,58 @@ import {Login} from "./Auth";
 import {IAppPage} from "../types";
 import PostUpdate from "./Posts/PostUpdate";
 import {RiHome2Line, RiArticleLine} from "react-icons/ri";
+import Pages from "./Pages/Pages";
+import Types from "./Settings/Types/Types";
 
 const pages: IAppPage[] = [
     {
-        name: '404 Not Found',
+        title: '404 Not Found',
         url: '*',
         component: NotFound
     },
     {
-        name: 'Login',
+        title: 'Login',
         url: '/',
         component: Login
     },
     {
-        name: 'Dashboard',
+        title: 'Dashboard',
         url: '/dashboard',
         component: Dashboard,
         layout: true,
         sidebar: true,
-        icon: RiHome2Line
+        icon: RiHome2Line as () => JSX.Element
     },
     {
-        name: 'Posts',
-        url: '/posts',
+        title: 'Posts',
+        url: '/types/post',
         component: Posts,
         layout: true,
-        sidebar: true,
-        icon: RiArticleLine
+        icon: RiArticleLine as () => JSX.Element
     },
     {
-        name: 'Create Post',
-        url: '/posts/create-post',
+        title: 'Create Post',
+        url: 'types/post/create-post',
         component: PostUpdate,
         layout: true
     },
     {
-        name: 'Update Post',
-        url: '/posts/:slug',
+        title: 'Update Post',
+        url: 'types/post/:slug',
         component: PostUpdate,
+        layout: true
+    },
+    {
+        title: 'Pages',
+        url: '/types/page',
+        component: Pages,
+        layout: true,
+        icon: RiArticleLine as () => JSX.Element
+    },
+    {
+        title: 'Types',
+        url: '/settings/types',
+        component: Types,
         layout: true
     }
 ]

@@ -12,7 +12,7 @@ const createWrapperAndAppendToBody = (wrapperId: string): HTMLDivElement => {
 const Portal = ({ children, wrapperId = 'modal-container' }: IPortalProps) => {
     const [wrapperElement, setWrapperElement] = React.useState<HTMLElement | null>(null);
 
-    React.useLayoutEffect(() => {
+    React.useEffect(() => {
         let element = document.getElementById(wrapperId);
         let systemCreated = false;
         // if element is not found with wrapperId or wrapperId is not provided,

@@ -12,6 +12,7 @@ type PostLastEdit = {
 
 type Post = {
     title: string
+    slug: string
     state: PostState
     type: PostType
 }
@@ -31,4 +32,12 @@ type UpdatePostQParams = {
 
 type DeletePostQParams = {
     slug: string
+}
+
+interface ReadPostsFilters extends DefaultFilters {
+    limit?: number
+    page?: number
+    fields?: any
+    sort?: any
+    type?: string
 }

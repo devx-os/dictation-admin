@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Label } from '../Label';
 
 interface ISelectProps {
     className?: string;
+    inputClassName?: string;
     label?: string;
     placeholder: string;
-    options: string[];
+    options: React.ReactNode | React.ReactNode[];
     value?: any;
     onChange?: (event: {
         target: any;
@@ -15,16 +15,15 @@ interface ISelectProps {
 }
 
 const Select = React.forwardRef<HTMLSelectElement, ISelectProps>(
-    ({ className, label, options, onChange = () => {}, ...rest }: ISelectProps, ref: React.Ref<HTMLSelectElement>): JSX.Element => {
-        const { value, name = '', ...hookFormProps } = rest;
+    ({ className = '', inputClassName= '', label, options, ...rest }: ISelectProps, ref: React.Ref<HTMLSelectElement>): JSX.Element => {
 
         return (
-            <div className={`form-control ${className}`}>
-                {label && <Label htmlFor={name}>{label}</Label>}
-                <select value={value} onChange={onChange} {...hookFormProps} ref={ref} className="select select-bordered select-primary w-full">
-                    {options.map((o: string, i) => (
-                        <option key={`${o}-${i}`}>{o}</option>
-                    ))}
+            <div className={className}>
+                {label && <label className="label">
+                    <span className="label-text">{label}</span>
+                </label>}
+                <select ref={ref} {...rest} className={`select select-bordered select-primary ${inputClassName}`}>
+                    {options}
                 </select>
             </div>
         );

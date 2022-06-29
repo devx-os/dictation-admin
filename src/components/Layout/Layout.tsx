@@ -9,14 +9,14 @@ type LayoutProps = {
 }
 
 const Layout = ({children}: LayoutProps) => {
-    return (<div className='p-2 flex flex-col'>
+    return (<>
             <Header/>
             <div className='flex flex-row space-x-2 h-full flex-grow'>
                 <Sidebar/>
                 <Main>{children}</Main>
             </div>
             <Footer/>
-        </div>
+        </>
     );
 };
 

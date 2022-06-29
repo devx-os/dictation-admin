@@ -2,7 +2,8 @@ import * as React from 'react';
 import Router from "./Router";
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ToastContainer} from "react-toastify";
-import {FullscreenLoader} from "./components/Loader";
+import 'react-toastify/dist/ReactToastify.css';
+import {useGlobalLoader} from "./hooks/useGlobalLoader";
 
 const queryClientConfig = {
     defaultOptions: {
@@ -26,11 +27,10 @@ const queryClientConfig = {
 
 const queryClient = new QueryClient(queryClientConfig)
 
-function App() {
-    return (
-        <React.Suspense fallback={<FullscreenLoader/>}>
-
-        <QueryClientProvider client={queryClient}>
+const App = () => {
+    const {stop} = useGlobalLoader()
+    React.useEffect(stop, [])
+    return (<QueryClientProvider client={queryClient}>
             <Router/>
             <ToastContainer
                 position="bottom-center"
@@ -44,7 +44,6 @@ function App() {
                 pauseOnHover
             />
         </QueryClientProvider>
-        </React.Suspense>
     )
 }
 

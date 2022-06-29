@@ -23,15 +23,9 @@ const Modal = ({
 
     if (!opened) return null;
 
-    const handleButtonColorClassName = (color?: string): string => {
-        let className = 'btn';
-        if (color) className = className + ` ${color}-500 hover:${color}-700`;
-        return className;
-    };
-
     return (
         <Portal wrapperId="modal-container">
-            <input type="checkbox" id={id} className="modal-toggle" />
+            <input type="checkbox" checked={dialogOptions.opened} id={id} className="modal-toggle" />
             <div className="modal" {...rest}>
                 <div className="modal-box flex flex-col md:max-w-2xl">
                     {/* MODAL HEADER */}
@@ -50,7 +44,7 @@ const Modal = ({
                                 (a: IModalActions, i: number): JSX.Element => (
                                     <button
                                         key={`${a.label}-${i}`}
-                                        className={handleButtonColorClassName(a.color)}
+                                        className={a.className}
                                         onClick={a.action}
                                     >
                                         {a.label}

@@ -1,5 +1,4 @@
 import {SubmitHandler} from "react-hook-form";
-import {IconType} from "react-icons";
 
 export interface ID {
     id: string
@@ -11,12 +10,13 @@ export interface IForm {
 }
 
 export interface IAppPage {
-    name: string
+    title: string
     url: string
     component: () => JSX.Element,
     layout?: boolean,
     sidebar?: boolean,
-    icon?: IconType
+    exact?: boolean,
+    icon?: () => JSX.Element
 }
 
 export interface IPaginationResponse {
@@ -43,4 +43,15 @@ export enum PostState {
 export type PostType = {
     slug: string
     title: string
+}
+
+export interface HookQueryOptions {
+    onSuccess?: () => void
+}
+
+export interface DefaultFilters {
+    limit?: number
+    offset?: number
+    fields?: any
+    sort?: any
 }
