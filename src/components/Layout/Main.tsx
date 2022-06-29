@@ -7,7 +7,7 @@ type MainProps = {
 const Main = ({children}: MainProps) => {
     return (
         <main className='flex-grow card bg-base-200'>
-            <section className='card-body w-full h-full p-2'>
+            <section className='card-body w-full h-full p-4'>
                 {children}
             </section>
         </main>
