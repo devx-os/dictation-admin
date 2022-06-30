@@ -1,8 +1,14 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {Breadcrumb} from "../Breadcrumb";
+import {ROUTE} from "../../types";
 
 const Header = () => {
+    const navigate = useNavigate()
+    const handleLogout = () => {
+        window.localStorage.clear()
+        navigate(ROUTE.LOGIN)
+    }
     return (
         <header className="navbar bg-base-200 rounded-box mb-2">
             <div className="navbar-start">
@@ -20,7 +26,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <Link to='/dashboard' className="btn btn-ghost normal-case text-xl">Dictation</Link>
-                <Breadcrumb className='hidden lg:flex' />
+                <Breadcrumb className='hidden lg:flex'/>
             </div>
             <div className="navbar-center hidden lg:flex">
             </div>
@@ -34,13 +40,13 @@ const Header = () => {
                     <ul tabIndex={0}
                         className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li>
-                            <a className="justify-between">
+                            <Link to={ROUTE.USER_PROFILE} className="justify-between">
                                 Profile
                                 <span className="badge">New</span>
-                            </a>
+                            </Link>
                         </li>
-                        <li><a>Settings</a></li>
-                        <li><Link to={'/'}>Logout</Link></li>
+                        <li><Link to={ROUTE.USER_SETTINGS}>Settings</Link></li>
+                        <li><a onClick={handleLogout}>Logout</a></li>
                     </ul>
                 </div>
             </div>

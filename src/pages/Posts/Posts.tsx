@@ -1,18 +1,24 @@
 import * as React from 'react';
 import PostsTable from "./PostsTable";
+import {RiArticleLine} from "react-icons/ri";
 import {CgMathPlus} from "react-icons/cg";
 import {useNavigate} from "react-router-dom";
+import {PageHeader} from "../../components/PageHeader";
+import {ROUTE} from "../../types";
 
 const Posts = () => {
     const navigate = useNavigate()
 
     return (<>
-            <div className='flex w-max items-center space-x-2'>
-                <h2 className='text-xl'>Posts</h2>
-                <button className='btn btn-outline btn-xs' onClick={() => navigate('/types/post/create-post')}>
-                    <CgMathPlus/> Add post
-                </button>
-            </div>
+            <PageHeader>
+                {<PageHeader.Icon><RiArticleLine /></PageHeader.Icon>}
+                <PageHeader.Title>{`Posts`}</PageHeader.Title>
+                <PageHeader.Left>
+                    <button className='btn btn-accent hover:bg-transparent hover:text-accent btn-xs w-max' onClick={() => navigate(ROUTE.TYPE_POST_CREATE)}>
+                        <CgMathPlus/> Create post
+                    </button>
+                </PageHeader.Left>
+            </PageHeader>
             <PostsTable/>
         </>
     );

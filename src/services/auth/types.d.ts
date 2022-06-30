@@ -1,4 +1,9 @@
-type LoginRequestBody = {
-    login: string,
-    password: string
+type SignInRequestBody = {
+    username: string,
+    password: string,
+}
+
+type SignUpRequestBody = {
+    email: string,
+    password: string,
 }

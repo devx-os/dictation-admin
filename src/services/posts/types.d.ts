@@ -38,6 +38,6 @@ interface ReadPostsFilters extends DefaultFilters {
     limit?: number
     page?: number
     fields?: any
-    sort?: any
+    sort?: object
     type?: string
 }

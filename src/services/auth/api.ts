@@ -1,8 +1,18 @@
 import {backendClient} from "../../utils/httpClient";
 
-const login = async (credentials: LoginRequestBody)  => {
-    const {data} = await backendClient.post(`/login`, credentials)
+const readUserInfo = async () => {
+    const {data} = await backendClient.get(`user-info`)
     return data
 }
 
-export { login }
+const signIn = async (credentials: SignInRequestBody)  => {
+    const {data} = await backendClient.post(`/sign-in`, credentials)
+    return data
+}
+
+const signUp = async (body: SignUpRequestBody)  => {
+    const {data} = await backendClient.post(`/create-user`, body)
+    return data
+}
+
+export { readUserInfo, signIn, signUp }

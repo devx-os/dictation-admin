@@ -7,9 +7,9 @@ import {HookQueryOptions} from "../../../types";
 const UseCreatePost = ({ onSuccess = () => {} }: HookQueryOptions) => {
     const queryClient = useQueryClient()
     return useMutation(createPost, {
-        onSuccess: () => {
+        onSuccess: async () => {
             toast.success('Post successfully created.')
-            queryClient.invalidateQueries('readPosts')
+            await queryClient.invalidateQueries('readPosts')
             onSuccess()
         },
         onError: () => {

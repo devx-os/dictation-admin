@@ -2,7 +2,6 @@ import {DefaultFilters} from "../types";
 
 const handleFilters = (filters: DefaultFilters): string => {
     const defaultValues = {limit: -1, offset: -1, fields: {}, sort: {}}
-    console.log('filters', filters)
     let stringFilters = '';
     if (filters && Object.keys(filters).length > 0) {
         const baseFilters = Object.assign({}, defaultValues, filters)

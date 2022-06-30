@@ -1,12 +1,12 @@
 import React from 'react';
-import LoginForm from "./LoginForm";
-import {useNavigate} from "react-router-dom";
+import SignUpForm from "./SignUpForm";
+import useSignUp from "../../services/auth/hooks/useSignUp";
 
-const Login = () => {
-    const navigate = useNavigate()
+const SignIn = () => {
+    const {mutateAsync: signUp} = useSignUp({})
 
-    const handleLoginFormSubmit = (values: LoginFormValues) => {
-        if (values.email === 'admin@demo.com' && values.password === 'demo') navigate('/dashboard')
+    const onSubmitSignUpForm = async (values: SignUpFormValues) => {
+        await signUp(values)
     }
 
     return (
@@ -21,7 +21,7 @@ const Login = () => {
                         />
                     </div>
                     <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
-                        <LoginForm onSubmit={handleLoginFormSubmit} />
+                        <SignUpForm onSubmit={onSubmitSignUpForm}/>
                     </div>
                 </div>
             </div>
@@ -29,4 +29,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignIn;

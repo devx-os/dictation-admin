@@ -43,9 +43,6 @@ const PostForm = ({initialValues, onSubmit}: PostFormProps) => {
         edited: false,
     })
 
-    console.log('VALUES', getValues())
-    console.log('ERRORS', errors)
-
     const mdParser = new MarkdownIt(/* Markdown-it options */);
 
     function handleEditorChange({html, text}: any) {

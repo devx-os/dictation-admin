@@ -2,6 +2,7 @@ import React from 'react';
 import pages from "../../pages";
 import {Link, useLocation} from "react-router-dom";
 import {useReadPostTypes} from "../../services/postType/hooks";
+import {ROUTE} from "../../types";
 
 const Sidebar = () => {
 
@@ -41,7 +42,12 @@ const Sidebar = () => {
                     <span>Settings</span>
                 </li>
                 <li>
-                    <Link to='/settings/types'>
+                    <Link className={location.pathname ===ROUTE.SETTINGS_GENERAL ? 'active' : ''} to={ROUTE.SETTINGS_GENERAL}>
+                        General
+                    </Link>
+                </li>
+                <li>
+                    <Link className={location.pathname === ROUTE.SETTINGS_TYPES ? 'active' : ''} to={ROUTE.SETTINGS_TYPES}>
                         Types
                     </Link>
                 </li>

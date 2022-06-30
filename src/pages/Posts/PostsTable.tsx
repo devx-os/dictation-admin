@@ -9,8 +9,9 @@ import {Modal} from "../../components/Modal";
 import {useDialog} from "../../hooks/useDialog";
 import {useNavigate} from "react-router-dom";
 import {padNumber} from "../../utils/number";
-import useServerSidePagination from "../../hooks/useServerSidePagination/useServerSidePagination";
+import {useServerSideFilters} from "../../hooks";
 import PaginationBar from "../../components/PaginationBar/PaginationBar";
+import useDebounce from "../../hooks/useDebounce/useDebounce";
 
 const IndeterminateCheckbox = React.forwardRef(
     ({indeterminate, ...rest}: any, ref) => {
@@ -26,66 +27,82 @@ const IndeterminateCheckbox = React.forwardRef(
 )
 
 const PostsTable = () => {
-    const paginationProps = useServerSidePagination()
-    const {data: postsData} = useReadPosts({type: 'post', page: paginationProps.page, limit: paginationProps.limit})
+    const {page, setPage, limit, setLimit, sort, setSort, setFilters, prev, next, ...filters} = useServerSideFilters()
+    const [filtersState, setFiltersState] = React.useState<any>({})
+    const debouncedFilters = useDebounce(filtersState, 750)
 
     const deleteDialog = useDialog('delete-post-modal')
     const navigate = useNavigate()
+
+    const {data: postsData} = useReadPosts({type: 'post', ...filters, page, limit, sort})
     const {mutateAsync: deletePost} = useDeletePost({onSuccess: deleteDialog.close})
 
-    const columns: any = React.useMemo(() => [
-        {
-            Header: '',
-            accessor: 'id',
-            Cell: ({row}: CellProps<Post>) => padNumber(((paginationProps.page - 1) * paginationProps.limit) + 1 + row.index),
-            width: 50
-        },
-        {
-            Header: 'Image',
-            accessor: 'image',
-            Cell: () => <div className='aspect-w-16 aspect-h-9 lg:aspect-none'><img src='https://picsum.photos/60/50'
-                                                                                    alt=""/></div>,
-            width: 100
-        },
-        {
-            Header: 'Title',
-            accessor: 'title',
-            width: 1000
-        },
-        {
-            Header: 'Last Update',
-            accessor: 'lastUpdate',
-            Cell: ({value}: CellProps<Post>) => {
-                const date = new Date(value)
-                return (
-                    <div className="flex flex-col italic text-xs">
-                        <span>{date.toLocaleDateString('en-US')}</span><span>{date.toLocaleTimeString('en-US')}</span>
-                    </div>
-                )
+    React.useEffect(() => {
+        setFilters({...filters, ...debouncedFilters })
+    },[debouncedFilters])
+
+    const columns: any = React.useMemo(() => {
+        return [
+            {
+                Header: '',
+                accessor: 'id',
+                Cell: ({row}: CellProps<Post>) => <span className='text-xs font-bold'>{padNumber(((page - 1) * limit) + 1 + row.index)}</span>,
+                width: 50
             },
-            width: 200
-        },
-        {
-            Header: 'State',
-            accessor: 'state',
-            Cell: ({value}: CellProps<Post>) => <div className="badge uppercase">{value}</div>,
-            width: 200
-        },
-        {
-            Header: '',
-            accessor: 'slug',
-            width: 150,
-            Cell: ({value}: CellProps<Post>) => <div className='dropdown dropdown-end'>
-                <label tabIndex={0} className="btn btn-sm btn-circle btn-outline border-0">
-                    <CgMoreVerticalAlt/>
-                </label>
-                <ul tabIndex={0} className='dropdown-content menu shadow bg-base-100 w-52 rounded'>
-                    <li><a onClick={() => navigate(`${value}`)}><RiPencilRuler2Line/>Edit</a></li>
-                    <li><a onClick={() => deleteDialog.open(value)}><CgTrash className='text-red-500'/>Delete</a></li>
-                </ul>
-            </div>
-        }
-    ], [paginationProps.page])
+            {
+                Header: 'Image',
+                accessor: 'image',
+                Cell: () => <div className='aspect-w-16 aspect-h-9 lg:aspect-none'><img src='https://picsum.photos/60/50' alt=""/></div>,
+                width: 100
+            },
+            {
+                Header: 'Title',
+                accessor: 'title',
+                width: 1000,
+                sort: sort.title || 0,
+                filterable: true,
+                filterValue: filtersState?.title || '',
+                handleFilter: (e: any) => {
+                    setFiltersState({...filtersState, title: e.target.value})
+                }
+            },
+            {
+                Header: 'Last Update',
+                accessor: 'lastUpdate',
+                Cell: ({value}: CellProps<Post>) => {
+                    const date = new Date(value)
+                    return (
+                        <div className="flex flex-col italic text-xs">
+                            <span>{date.toLocaleDateString('en-US')}</span><span>{date.toLocaleTimeString('en-US')}</span>
+                        </div>
+                    )
+                },
+                width: 200,
+                sort: sort.lastUpdate || 0
+            },
+            {
+                Header: 'State',
+                accessor: 'state',
+                Cell: ({value}: CellProps<Post>) => <div className="badge uppercase">{value}</div>,
+                width: 200,
+                sort: sort.state || 0
+            },
+            {
+                Header: '',
+                accessor: 'slug',
+                width: 150,
+                Cell: ({value}: CellProps<Post>) => <div className='dropdown dropdown-end'>
+                    <label tabIndex={0} className="btn btn-sm btn-circle btn-outline border-0">
+                        <CgMoreVerticalAlt/>
+                    </label>
+                    <ul tabIndex={0} className='dropdown-content menu shadow bg-base-100 w-52 rounded'>
+                        <li><a onClick={() => navigate(`${value}`)}><RiPencilRuler2Line/>Edit</a></li>
+                        <li><a onClick={() => deleteDialog.open(value)}><CgTrash className='text-red-500'/>Delete</a></li>
+                    </ul>
+                </div>
+            }
+        ]
+    }, [page, sort, filtersState])
 
     const tableData = React.useMemo(() => postsData?.data || [], [postsData?.data])
 
@@ -117,9 +134,9 @@ const PostsTable = () => {
         })
 
     return <>
-        <TableBasic tableInstance={tableInstance} className='table-compact'/>
-        <PaginationBar {...paginationProps} totalItems={postsData?.pagination?.total || 0}/>
-        <Modal id='delete-post-modal' title={`Delete ${deleteDialog.obj?.slug}`} dialogOptions={deleteDialog} actions={[
+        <TableBasic tableInstance={tableInstance} sort={sort} setSort={setSort} className='table-compact'/>
+        <PaginationBar page={page} limit={limit} setPage={setPage} setLimit={setLimit} totalItems={postsData?.pagination?.total || 0}/>
+        <Modal id='delete-post-modal' title={`Delete ${deleteDialog.obj}`} dialogOptions={deleteDialog} actions={[
             {
                 label: 'Cancel',
                 className: 'btn btn-outline border-grey-300 hover:bg-grey-100',

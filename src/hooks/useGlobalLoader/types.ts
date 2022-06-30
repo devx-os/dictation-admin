@@ -11,6 +11,7 @@ export interface IUseLoaderState {
 export type UseLoaderResult = {
     start: () => void;
     stop: () => void;
+    withLoadingRequest: (req: Promise<any>) => any
 }
 
 export enum UseLoaderActions {

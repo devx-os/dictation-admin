@@ -26,13 +26,13 @@ const Router = () => {
         return comp
     }, [])
 
-    return (
+    return React.useMemo(() => (
         <BrowserRouter>
             <Routes>
                 {pages.map((p, i) => <Route key={`${p.title}-${i}`} path={p.url} element={handleComponent(p)}/>)}
             </Routes>
         </BrowserRouter>
-    );
+    ), [pages])
 };
 
 export default Router;

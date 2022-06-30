@@ -1,27 +1,36 @@
 import {Dashboard} from './Dashboard'
 import {Posts} from './Posts'
 import {NotFound} from "./NotFound";
-import {Login} from "./Auth";
-import {IAppPage} from "../types";
+import {SignIn} from "./Auth";
+import {IAppPage, ROUTE} from "../types";
 import PostUpdate from "./Posts/PostUpdate";
-import {RiHome2Line, RiArticleLine} from "react-icons/ri";
+import {RiArticleLine, RiHome2Line} from "react-icons/ri";
 import Pages from "./Pages/Pages";
 import Types from "./Settings/Types/Types";
+import SignUp from "./Auth/SignUp";
+import {General} from "./Settings/General";
+import {Profile} from "./User/Profile";
+import {UserSettings} from "./User/UserSettings";
 
 const pages: IAppPage[] = [
     {
         title: '404 Not Found',
-        url: '*',
+        url: ROUTE.NOT_FOUND,
         component: NotFound
     },
     {
         title: 'Login',
-        url: '/',
-        component: Login
+        url: ROUTE.LOGIN,
+        component: SignIn
+    },
+    {
+        title: 'SignUp',
+        url: ROUTE.SIGNUP,
+        component: SignUp
     },
     {
         title: 'Dashboard',
-        url: '/dashboard',
+        url: ROUTE.DASHBOARD,
         component: Dashboard,
         layout: true,
         sidebar: true,
@@ -29,34 +38,64 @@ const pages: IAppPage[] = [
     },
     {
         title: 'Posts',
-        url: '/types/post',
+        url: ROUTE.TYPE_POST,
         component: Posts,
         layout: true,
         icon: RiArticleLine as () => JSX.Element
     },
     {
         title: 'Create Post',
-        url: 'types/post/create-post',
+        url: ROUTE.TYPE_POST_CREATE,
         component: PostUpdate,
         layout: true
     },
     {
         title: 'Update Post',
-        url: 'types/post/:slug',
+        url: ROUTE.TYPE_POST_UPDATE,
         component: PostUpdate,
         layout: true
     },
     {
         title: 'Pages',
-        url: '/types/page',
+        url: ROUTE.TYPE_PAGE,
         component: Pages,
         layout: true,
         icon: RiArticleLine as () => JSX.Element
     },
     {
+        title: 'Create Page',
+        url: ROUTE.TYPE_PAGE_CREATE,
+        component: PostUpdate,
+        layout: true
+    },
+    {
+        title: 'Update Page',
+        url: ROUTE.TYPE_PAGE_UPDATE,
+        component: PostUpdate,
+        layout: true
+    },
+    {
+        title: 'General',
+        url: ROUTE.SETTINGS_GENERAL,
+        component: General,
+        layout: true
+    },
+    {
         title: 'Types',
-        url: '/settings/types',
+        url: ROUTE.SETTINGS_TYPES,
         component: Types,
+        layout: true
+    },
+    {
+        title: 'User settings',
+        url: ROUTE.USER_PROFILE,
+        component: Profile,
+        layout: true
+    },
+    {
+        title: 'User settings',
+        url: ROUTE.USER_SETTINGS,
+        component: UserSettings,
         layout: true
     }
 ]

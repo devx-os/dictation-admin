@@ -1,11 +1,12 @@
 import * as React from 'react';
+import {PageHeader} from "../../components/PageHeader";
 
 const Dashboard = () => {
     return (
         <>
-            <div className='flex w-max items-center space-x-2'>
-                <h2 className='text-xl'>Dashboard</h2>
-            </div>
+            <PageHeader>
+                <PageHeader.Title>{`Dashboard`}</PageHeader.Title>
+            </PageHeader>
         </>
     );
 };

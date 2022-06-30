@@ -2,8 +2,8 @@ import * as React from 'react';
 import Router from "./Router";
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ToastContainer} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import {useGlobalLoader} from "./hooks/useGlobalLoader";
+import 'react-toastify/dist/ReactToastify.css';
 
 const queryClientConfig = {
     defaultOptions: {
@@ -17,7 +17,6 @@ const queryClientConfig = {
             refetchInterval: 1000 * 30, //30 seconds
             refetchIntervalInBackground: false,
             suspense: false,
-
         },
         mutations: {
             retry: 2,

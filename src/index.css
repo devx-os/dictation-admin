@@ -11,7 +11,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
-    min-width: 100vw;
 }
 
 #root {
@@ -31,37 +30,10 @@ h1, h2, h3, h4, h5, h6 {
     Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-h1 {
-    /*noinspection CssInvalidFunction*/
-    font-size: rfs(5.61rem);
+.flex-responsive {
+    @apply flex flex-col space-y-2 md:flex-row md:items-center md:space-y-0 md:space-x-2;
 }
 
-h2 {
-    /*noinspection CssInvalidFunction*/
-    font-size: rfs(4.209rem);
-}
-
-h3 {
-    /*noinspection CssInvalidFunction*/
-    font-size: rfs(3.157rem);
-}
-
-h4 {
-    /*noinspection CssInvalidFunction*/
-    font-size: rfs(2.369rem);
-}
-
-h5 {
-    /*noinspection CssInvalidFunction*/
-    font-size: rfs(1.777rem);
-}
-
-h6 {
-    /*noinspection CssInvalidFunction*/
-    font-size: rfs(1.333rem);
-}
-
-p, span {
-    /*noinspection CssInvalidFunction*/
-    font-size: rfs(1rem);
+.page-title {
+    @apply text-xl font-bold uppercase
 }
