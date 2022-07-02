@@ -89,7 +89,7 @@ const TableBasic = ({
                                         </span>
                                     </div>
                                     {column.filterable && column.handleFilter &&
-                                      <input className='input input-xs input-primary max-w-fit' placeholder={'search 🔎'}
+                                      <input className='input input-xs input-primary max-w-fit font-normal' placeholder={'search 🔎'}
                                              value={column.filterValue} onChange={column.handleFilter}/>}
                                 </div>
                             </th>

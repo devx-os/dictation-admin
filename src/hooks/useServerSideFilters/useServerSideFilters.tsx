@@ -21,7 +21,7 @@ const useServerSideFiltersReducer = (state: IUseServerSideFiltersState, action: 
 
 const useServerSideFiltersInitialValues = {
     page: 1,
-    limit: 2,
+    limit: 10,
     sort: {}
 }
 

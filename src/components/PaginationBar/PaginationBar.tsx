@@ -13,7 +13,7 @@ const PaginationBar = ({
     const N_LEFT_BUTTONS = 2
     const N_RIGHT_BUTTONS = 2
     const SHOW_EXTREME_BUTTONS = true
-    const N_ITEMS_OPTIONS = [2, 5, 10]
+    const N_ITEMS_OPTIONS = [10,25,50]
 
     const [buttonsNumbers, setButtonsNumbers] = React.useState<number[]>([])
 
@@ -70,8 +70,8 @@ const PaginationBar = ({
             </div>
             <div className='flex flex-grow space-x-2 items-center justify-center md:justify-end'>
                 <span>{`Items to show`}</span>
-                <select className='select select-sm select-primary' onChange={(e) => setLimit(Number(e.target.value))}>
-                    {N_ITEMS_OPTIONS.map((o, i) => <option key={`${o}-${i}`} selected={o === limit}
+                <select className='select select-sm select-primary'  defaultValue={N_ITEMS_OPTIONS[0]} onChange={(e) => setLimit(Number(e.target.value))}>
+                    {N_ITEMS_OPTIONS.map((o, i) => <option key={`${o}-${i}`}
                                                            value={o}>{o}</option>)}
                 </select>
             </div>
